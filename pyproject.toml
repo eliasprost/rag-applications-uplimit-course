@@ -1,41 +1,47 @@
-[project]
+[tool.poetry]
 name = "rag-applications"
 version = "0.1.0"
 description = "Project for building RAG applications"
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "anthropic>=0.39.0",
-    "beautifulsoup4>=4.12.3",
-    "cohere>=5.11.3",
-    "datasets>=3.1.0",
-    "ipykernel>=6.29.5",
-    "ipython>=8.29.0",
-    "ipywidgets>=8.1.5",
-    "jupyterlab==4.3.0",
-    "litellm==1.52.2",
-    "llama-index-core==0.12.2",
-    "loguru>=0.7.2",
-    "matplotlib-inline>=0.1.7",
-    "matplotlib>=3.9.2",
-    "nest-asyncio>=1.6.0",
-    "openai>=1.54.3",
-    "pandas>=2.2.3",
-    "pyarrow>=18.0.0",
-    "python-dotenv>=1.0.1",
-    "rank-bm25>=0.2.2",
-    "requests>=2.32.3",
-    "requests-oauthlib>=2.0.0",
-    "rich>=13.9.4",
-    "torch>=2.2.0",
-    "tqdm>=4.67.0",
-    "sentence-transformers>=3.2.1",
-    "streamlit>=1.40.0",
-    "tiktoken>=0.8.0",
-    "tokenizers>=0.20.3",
-    "transformers>=4.46.2",
-    "weaviate-client>=4.9.3",
-    "instructor>=1.5.2",
-    "accelerate>=1.1.1",
-    "deepeval==1.5.2",
-]
+authors = ["Uplimit"]
+
+[tool.poetry.dependencies]
+python = "3.10"
+anthropic = ">=0.39.0"
+beautifulsoup4 = ">=4.12.3"
+cohere = ">=5.11.3"
+datasets = ">=3.1.0"
+ipykernel = ">=6.29.5"
+ipython = ">=8.29.0"
+ipywidgets = ">=8.1.5"
+jupyterlab = "==4.3.0"
+litellm = "==1.52.2"
+llama-index-core = "==0.12.2"
+loguru = ">=0.7.2"
+matplotlib-inline = ">=0.1.7"
+matplotlib = ">=3.9.2"
+nest-asyncio = ">=1.6.0"
+openai = ">=1.54.3"
+pandas = ">=2.2.3"
+pyarrow = ">=18.0.0"
+python-dotenv = ">=1.0.1"
+rank-bm25 = ">=0.2.2"
+requests = ">=2.32.3"
+requests-oauthlib = ">=2.0.0"
+rich = ">=13.9.4"
+torch = ">=2.2.0"
+tqdm = ">=4.67.0"
+sentence-transformers = ">=3.2.1"
+streamlit = ">=1.40.0"
+tiktoken = ">=0.8.0"
+tokenizers = ">=0.20.3"
+transformers = ">=4.46.2"
+weaviate-client = ">=4.9.3"
+instructor = ">=1.5.2"
+accelerate = ">=1.1.1"
+deepeval = "==1.5.2"
+watchdog = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
