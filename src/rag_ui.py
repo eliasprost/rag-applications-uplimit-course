@@ -44,6 +44,9 @@ crossencoder_model_path = 'cross-encoder/ms-marco-MiniLM-L-12-v2'
 weaviate_endpoint = os.environ['WEAVIATE_ENDPOINT']
 weaviate_api_key = os.environ['WEAVIATE_API_KEY']
 
+## Display properties
+display_properties = ['guest', 'title', 'length_seconds', 'episode_url', 'thumbnail_url', 'content', 'summary']
+
 ## RETRIEVER
 retriever = WeaviateWCS(endpoint=weaviate_endpoint, api_key=weaviate_api_key, model_name_or_path=embedding_model_path, skip_initial_checks=True)
 if retriever._client.is_live():
@@ -58,8 +61,6 @@ llm = LLM(reader_model_name)
 ## TOKENIZER
 encoding = get_encoding("cl100k_base")
 
-## Display properties
-display_properties = [prop.name for prop in retriever.show_collection_properties(collection_name)]
 
 ## Data
 data = load_data(data_path)
@@ -120,7 +121,7 @@ def main(retriever: WeaviateWCS):
             step=1,
         )
                 
-    # retriever.return_properties.append('expanded_content')
+    retriever.return_properties.append('expanded_content')
 
     ##############################
     ##### SETUP MAIN DISPLAY #####
@@ -143,7 +144,7 @@ def main(retriever: WeaviateWCS):
 
         guest_filter = Filter.by_property(name='guest').equal(guest_input) if guest_input else None
     
-        hybrid_response = retriever.hybrid_search(query, collection_name, alpha=alpha_input, limit=retrieval_limit, filter=guest_filter)
+        hybrid_response = retriever.hybrid_search(query, collection_name, alpha=alpha_input, limit=retrieval_limit, filter=guest_filter, return_properties = display_properties)
 
         #implement your reranking step
         ranked_response = reranker.rerank(hybrid_response, query, reranker_topk, apply_sigmoid=True)
@@ -205,7 +206,7 @@ def main(retriever: WeaviateWCS):
 
                 with col2:
                     image = hit['thumbnail_url']
-                    st.image(image, caption=title.split('|')[0], width=200, use_column_width=False)
+                    st.image(image, caption=title.split('|')[0], width=200, use_container_width=False)
                     st.markdown(f'<p style="text-align": right;"><b>Guest: {hit["guest"]}</b>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
